@@ -1,6 +1,6 @@
 local L
 
-L = DBM:GetModLocalization("TimelessIsle")
+L = DBM:GetModLocalization("IsleTimeless")
 
 L:SetGeneralLocalization({
 	name = "World: Timeless Isle"
