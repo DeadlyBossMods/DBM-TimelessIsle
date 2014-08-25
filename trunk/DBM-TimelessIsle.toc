@@ -2,7 +2,7 @@
 ## X-Min-Interface: 50400
 ## Title:|cffffe00a<|r|cffff7d0aDBM|r|cffffe00a>|r |cff69ccf0World: Timeless Isle|r
 ## Author: MysticalOS
-## LoadOnDemand: 0
+## LoadOnDemand: 1
 ## RequiredDeps: DBM-Core
 ## SavedVariablesPerCharacter: DBMTimelessIsle_SavedVars
 ## X-DBM-Mod: 1
@@ -11,5 +11,6 @@
 ## X-DBM-Mod-No-Statistics: 1
 ## X-DBM-Mod-Name: World: Timeless Isle
 ## X-DBM-Mod-Sort: 251
+## X-DBM-Mod-MapID: 870
 localization.en.lua
-TimelessIsle.lua
+IsleTimeless.lua
