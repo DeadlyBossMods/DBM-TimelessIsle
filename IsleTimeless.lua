@@ -56,7 +56,6 @@ local UnitAffectingCombat, UnitGUID = UnitAffectingCombat, UnitGUID
 local currentZoneID = -1
 
 local function zoneCode()
-	print("zonecoderan")
 	if WorldMapFrame:IsVisible() then--World Map is open
 		local Z = GetCurrentMapAreaID()
 		SetMapToCurrentZone()
