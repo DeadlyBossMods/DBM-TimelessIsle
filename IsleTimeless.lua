@@ -53,6 +53,31 @@ mod:RemoveOption("SpeedKillTimer")
 
 local GetCurrentMapAreaID, SetMapToCurrentZone = GetCurrentMapAreaID, SetMapToCurrentZone
 local UnitAffectingCombat, UnitGUID = UnitAffectingCombat, UnitGUID
+local currentZoneID = -1
+
+local function zoneCode()
+	print("zonecoderan")
+	if WorldMapFrame:IsVisible() then--World Map is open
+		local Z = GetCurrentMapAreaID()
+		SetMapToCurrentZone()
+		currentZoneID = GetCurrentMapAreaID()
+		if currentZone ~= Z then
+			SetMapByID(Z)--Restore old map settings if they differed to what they were prior to forcing mapchange and user has map open.
+		end
+	else--Map is not open, no reason to go extra miles, just force map to right zone and get right info.
+		SetMapToCurrentZone()
+		currentZoneID = GetCurrentMapAreaID()--Get right info after we set map to right place.
+	end
+	if currentZoneID == 951 then
+		mod:RegisterShortTermEvents(
+			"CHAT_MSG_MONSTER_YELL",
+			"SPELL_CAST_START 148003 148004 147997 148001 147998 147828 147826 147674 147723 147769 147702 147818 147817"
+		)
+	else
+		mod:UnregisterShortTermEvents()
+	end
+end
+zoneCode()--Make sure it runs on mod load
 
 function mod:FireBlossomTarget(targetname, uId)
 	if not targetname then return end
@@ -71,25 +96,7 @@ function mod:StormBlossomTarget(targetname, uId)
 end
 
 function mod:ZONE_CHANGED_NEW_AREA()
-	if WorldMapFrame:IsVisible() then--World Map is open
-		local Z = GetCurrentMapAreaID()
-		SetMapToCurrentZone()
-		currentZone = GetCurrentMapAreaID()
-		if currentZone ~= Z then
-			SetMapByID(Z)--Restore old map settings if they differed to what they were prior to forcing mapchange and user has map open.
-		end
-	else--Map is not open, no reason to go extra miles, just force map to right zone and get right info.
-		SetMapToCurrentZone()
-		currentZone = GetCurrentMapAreaID()--Get right info after we set map to right place.
-	end
-	if currentZone == 951 then
-		self:RegisterShortTermEvents(
-			"CHAT_MSG_MONSTER_YELL",
-			"SPELL_CAST_START 148003 148004 147997 148001 147998 147828 147826 147674 147723 147769 147702 147818 147817"
-		)
-	else
-		self:UnregisterShortTermEvents()
-	end
+	zoneCode()
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(msg, npc)
