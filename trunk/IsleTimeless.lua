@@ -10,7 +10,6 @@ mod:RegisterEvents(
 
 --TODO, add a cauterize timer.
 --TODO, add move warning for dread ship fire.
---TODO, verify Serpant target scanning
 
 --Serpants
 local warnFlameBreath			= mod:NewSpellAnnounce(147817, 3)
@@ -27,7 +26,7 @@ local warnConjurKiln			= mod:NewSpellAnnounce(148004, 3)
 local warnConjurGolem			= mod:NewSpellAnnounce(148001, 3)
 local warnFireStorm				= mod:NewSpellAnnounce(147998, 3)
 local warnCauterize				= mod:NewSpellAnnounce(147997, 4)
---Rock Moss
+--Rock Moss/Spelurk
 local warnRenewingMists			= mod:NewSpellAnnounce(147769, 4)
 
 --Serpants
@@ -44,7 +43,7 @@ local specWarnConjurKiln		= mod:NewSpecialWarningSwitch(148004)
 local specWarnConjurGolem		= mod:NewSpecialWarningSpell(148001, false)--Strat and class dependant. a tank doesn't care about these, but squishy mage may need to kite
 local specWarnFireStorm			= mod:NewSpecialWarningSpell(147998, nil, nil, nil, 2)
 local specWarnCauterize			= mod:NewSpecialWarningInterrupt(147997)
---Rock Moss
+--Rock Moss/Spelurk
 local specWarnRenewingMists		= mod:NewSpecialWarningInterrupt(147769)
 
 mod:AddBoolOption("StrictFilter", true)--Only warn for current target/focus and nothing else. Otherwise you run risk of excessive spam when fighting near other groups fighting same mobs.
@@ -54,7 +53,14 @@ mod:RemoveOption("SpeedKillTimer")
 local GetCurrentMapAreaID, SetMapToCurrentZone = GetCurrentMapAreaID, SetMapToCurrentZone
 local UnitAffectingCombat, UnitGUID = UnitAffectingCombat, UnitGUID
 local currentZoneID = -1
+local grieversbyRealm = {
+	Whisperwind = "Mortusmagus (horde mage)"	
+}
 
+local playerRealm = GetRealmName("player")
+if grieversbyRealm[playerRealm] then
+	DBM:AddMsg(L.grieversMessage:format(grieversbyRealm[playerRealm]))
+end
 local function zoneCode()
 	if WorldMapFrame:IsVisible() then--World Map is open
 		local Z = GetCurrentMapAreaID()
