@@ -35,7 +35,7 @@ local specWarnStormBlossom		= mod:NewSpecialWarningYou(147828)
 --Weaker Ordon
 local specWarnShip				= mod:NewSpecialWarning("specWarnShip", false)
 local specWarnCracklingBlow		= mod:NewSpecialWarningMove(147674, false)
-local specWarnFallingFlames		= mod:NewSpecialWarningSpell(147723, not mod:IsTank(, nil, nil, 2)
+local specWarnFallingFlames		= mod:NewSpecialWarningSpell(147723, not mod:IsTank(), nil, nil, 2)
 local specWarnBlazingCleave		= mod:NewSpecialWarningMove(147702, not mod:IsTank())--Tanks stand in it on purpose so no need to warn them
 --Tougher Ordon
 local specWarnBlazingBlow		= mod:NewSpecialWarningMove(148003, false)
