@@ -13,4 +13,5 @@
 ## X-DBM-Mod-Sort: 251
 ## X-DBM-Mod-MapID: 870
 localization.en.lua
+localization.ru.lua
 IsleTimeless.lua
