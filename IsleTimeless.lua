@@ -32,8 +32,10 @@ local warnRenewingMists			= mod:NewSpellAnnounce(147769, 4)
 --Serpants
 local specWarnFireBlossom		= mod:NewSpecialWarningYou(147818)
 local specWarnStormBlossom		= mod:NewSpecialWarningYou(147828)
---Weaker Ordon
+--Spawns
 local specWarnShip				= mod:NewSpecialWarning("specWarnShip", false)
+local specWarnGolg				= mod:NewSpecialWarning("specWarnGolg")
+--Weaker Ordon
 local specWarnCracklingBlow		= mod:NewSpecialWarningMove(147674, false)
 local specWarnFallingFlames		= mod:NewSpecialWarningSpell(147723, not mod:IsTank(), nil, nil, 2)
 local specWarnBlazingCleave		= mod:NewSpecialWarningMove(147702, not mod:IsTank())--Tanks stand in it on purpose so no need to warn them
@@ -56,6 +58,8 @@ local currentZoneID = -1
 local grieversbyRealm = {
 	Whisperwind = "Mortusmagus (horde mage), Zuljiri (horde druid)"	
 }
+--Connected realms
+grieversbyRealm.Dentarg = grieversbyRealm.Whisperwind
 
 local playerRealm = GetRealmName("player")
 if grieversbyRealm[playerRealm] then
@@ -107,6 +111,8 @@ end
 function mod:CHAT_MSG_MONSTER_YELL(msg, npc)
 	if msg == L.shipSummon or msg:find(L.shipSummon) then
 		specWarnShip:Show()
+	elseif msg == L.golgSpawn or msg:find(L.golgSpawn) then
+		specWarnGolg:Show()
 	end
 end
 
