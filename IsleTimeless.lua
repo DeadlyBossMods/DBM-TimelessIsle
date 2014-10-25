@@ -35,6 +35,8 @@ local specWarnStormBlossom		= mod:NewSpecialWarningYou(147828)
 --Spawns
 local specWarnShip				= mod:NewSpecialWarning("specWarnShip", false)
 local specWarnGolg				= mod:NewSpecialWarning("specWarnGolg")
+--Frogs
+local specWarnFrogToxin			= mod:NewSpecialWarningStack(147655, nil, 7)
 --Weaker Ordon
 local specWarnCracklingBlow		= mod:NewSpecialWarningMove(147674, false)
 local specWarnFallingFlames		= mod:NewSpecialWarningSpell(147723, not mod:IsTank(), nil, nil, 2)
@@ -80,7 +82,8 @@ local function zoneCode()
 	if currentZoneID == 951 then
 		mod:RegisterShortTermEvents(
 			"CHAT_MSG_MONSTER_YELL",
-			"SPELL_CAST_START 148003 148004 147997 148001 147998 147828 147826 147674 147723 147769 147702 147818 147817"
+			"SPELL_CAST_START 148003 148004 147997 148001 147998 147828 147826 147674 147723 147769 147702 147818 147817",
+			"SPELL_AURA_APPLIED_DOSE 147655",
 		)
 	else
 		mod:UnregisterShortTermEvents()
@@ -113,6 +116,13 @@ function mod:CHAT_MSG_MONSTER_YELL(msg, npc)
 		specWarnShip:Show()
 	elseif msg == L.golgSpawn or msg:find(L.golgSpawn) then
 		specWarnGolg:Show()
+	end
+end
+
+function mod:SPELL_AURA_APPLIED_DOSE(args)
+	local spellId = args.spellId
+	if spellId == 147655 and args:IsPlayer() then
+		specWarnFrogToxin:Show(args.amount or 1)
 	end
 end
 
