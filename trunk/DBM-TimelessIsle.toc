@@ -4,7 +4,7 @@
 ## Author: MysticalOS
 ## LoadOnDemand: 1
 ## RequiredDeps: DBM-Core
-## SavedVariablesPerCharacter: DBMTimelessIsle_SavedVars
+## SavedVariables: DBMTimelessIsle_AllSavedVars
 ## X-DBM-Mod: 1
 ## X-DBM-Mod-Type: OTHER
 ## X-DBM-Mod-Category: MOP
@@ -12,6 +12,7 @@
 ## X-DBM-Mod-Name: World: Timeless Isle
 ## X-DBM-Mod-Sort: 251
 ## X-DBM-Mod-MapID: 870
+## X-DBM-Mod-MinCoreRevision: 12473
 localization.en.lua
 localization.ru.lua
 IsleTimeless.lua
