@@ -57,16 +57,7 @@ mod:RemoveOption("SpeedKillTimer")
 local GetCurrentMapAreaID, SetMapToCurrentZone = GetCurrentMapAreaID, SetMapToCurrentZone
 local UnitAffectingCombat, UnitGUID = UnitAffectingCombat, UnitGUID
 local currentZoneID = -1
-local grieversbyRealm = {
-	Whisperwind = "Mortusmagus (horde mage), Zuljiri (horde druid)"	
-}
---Connected realms
-grieversbyRealm.Dentarg = grieversbyRealm.Whisperwind
 
-local playerRealm = GetRealmName("player")
-if grieversbyRealm[playerRealm] then
-	DBM:AddMsg(L.grieversMessage:format(grieversbyRealm[playerRealm]))
-end
 local function zoneCode()
 	if WorldMapFrame:IsVisible() then--World Map is open
 		local Z = GetCurrentMapAreaID()
