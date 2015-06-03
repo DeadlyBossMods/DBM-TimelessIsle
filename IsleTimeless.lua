@@ -52,7 +52,6 @@ local specWarnRenewingMists		= mod:NewSpecialWarningInterrupt(147769)
 
 mod:AddBoolOption("StrictFilter", true)--Only warn for current target/focus and nothing else. Otherwise you run risk of excessive spam when fighting near other groups fighting same mobs.
 mod:RemoveOption("HealthFrame")
-mod:RemoveOption("SpeedKillTimer")
 
 local GetCurrentMapAreaID, SetMapToCurrentZone = GetCurrentMapAreaID, SetMapToCurrentZone
 local UnitAffectingCombat, UnitGUID = UnitAffectingCombat, UnitGUID
