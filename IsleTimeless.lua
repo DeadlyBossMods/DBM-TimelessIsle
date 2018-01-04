@@ -16,18 +16,6 @@ local warnFlameBreath			= mod:NewSpellAnnounce(147817, 3)
 local warnFireBlossom			= mod:NewTargetAnnounce(147818, 3)
 local warnLightningBreath		= mod:NewSpellAnnounce(147826, 3)
 local warnStormBlossom			= mod:NewTargetAnnounce(147828, 3)
---Weaker Ordon
-local warnCracklingBlow			= mod:NewSpellAnnounce(147674, 3, nil, false)--Spammy if filter is disabled, so optional warning dependant on number of mobs player is accustomed to pulling.
-local warnFallingFlames			= mod:NewSpellAnnounce(147723, 3)
-local warnBlazingBlow			= mod:NewSpellAnnounce(148003, 3, nil, false)--Spammy if filter is disabled, so optional warning dependant on number of mobs player is accustomed to pulling.
-local warnBlazingCleave			= mod:NewCastAnnounce(147702, 3)
---Tougher Ordon
-local warnConjurKiln			= mod:NewSpellAnnounce(148004, 3)
-local warnConjurGolem			= mod:NewSpellAnnounce(148001, 3)
-local warnFireStorm				= mod:NewSpellAnnounce(147998, 3)
-local warnCauterize				= mod:NewSpellAnnounce(147997, 4)
---Rock Moss/Spelurk
-local warnRenewingMists			= mod:NewSpellAnnounce(147769, 4)
 
 --Serpants
 local specWarnFireBlossom		= mod:NewSpecialWarningYou(147818)
@@ -83,17 +71,19 @@ zoneCode()--Make sure it runs on mod load
 
 function mod:FireBlossomTarget(targetname, uId)
 	if not targetname then return end
-	warnFireBlossom:Show(targetname)
 	if targetname == UnitName("player") then
 		specWarnFireBlossom:Show()
+	else
+		warnFireBlossom:Show(targetname)
 	end
 end
 
 function mod:StormBlossomTarget(targetname, uId)
 	if not targetname then return end
-	warnStormBlossom:Show(targetname)
 	if targetname == UnitName("player") then
 		specWarnStormBlossom:Show()
+	else
+		warnStormBlossom:Show(targetname)
 	end
 end
 
@@ -122,25 +112,18 @@ function mod:SPELL_CAST_START(args)
 	if not UnitAffectingCombat("player") then return end--secondary filter, if not using strict filter at least try a basic "is player in combat" filter.
 	local spellId = args.spellId
 	if spellId == 147997 then
-		warnCauterize:Show()
 		specWarnCauterize:Show(args.sourceName)
 	elseif spellId == 148004 then
-		warnConjurKiln:Show()
 		specWarnConjurKiln:Show()
 	elseif spellId == 147674 then
-		warnCracklingBlow:Show()
 		specWarnCracklingBlow:Show()
 	elseif spellId == 148003 then
-		warnBlazingBlow:Show()
 		specWarnBlazingBlow:Show()
 	elseif spellId == 148001 then
-		warnConjurGolem:Show()
 		specWarnConjurGolem:Show()
 	elseif spellId == 147998 then
-		warnFireStorm:Show()
 		specWarnFireStorm:Show()
 	elseif spellId == 147723 then
-		warnFallingFlames:Show()
 		specWarnFallingFlames:Show()
 	elseif spellId == 147818 then
 		self:BossTargetScanner(sourceGUID, "FireBlossomTarget", 0.02, 16)
@@ -151,10 +134,8 @@ function mod:SPELL_CAST_START(args)
 	elseif spellId == 147826 then
 		warnLightningBreath:Show()
 	elseif spellId == 147769 then
-		warnRenewingMists:Show()
 		specWarnRenewingMists:Show(args.sourceName)
 	elseif spellId == 147702 then
-		warnBlazingCleave:Show()
 		specWarnBlazingCleave:Show()
 	end
 end
