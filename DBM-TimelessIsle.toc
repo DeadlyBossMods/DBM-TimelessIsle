@@ -12,7 +12,7 @@
 ## X-DBM-Mod-No-Statistics: 1
 ## X-DBM-Mod-Name: World: Timeless Isle
 ## X-DBM-Mod-Name-esES: Isla Intemporal
-## X-DBM-Mod-Sort: 251
+## X-DBM-Mod-Sort: 716
 ## X-DBM-Mod-MapID: 870
 ## X-DBM-Mod-MinCoreRevision: 12473
 localization.en.lua
