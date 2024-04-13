@@ -2,4 +2,4 @@ package-as: DBM-TimelessIsle
 enable-nolib-creation: no
 
 move-folders:
-	DBM-TimelessIsle/DBM-TimelessIsle: DBM-TimelessIsle
+  DBM-TimelessIsle/DBM-TimelessIsle: DBM-TimelessIsle
