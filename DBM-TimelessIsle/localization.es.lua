@@ -14,8 +14,7 @@ L:SetWarningLocalization({
 
 L:SetOptionLocalization({
 	specWarnShip	= "Show special warning when Dread Ship Vazuvius is summoned",
-	specWarnGolg	= "Show special warning when Golganarr has spawned",
-	StrictFilter	= "Filter casts from all mobs except for current target/focus"
+	specWarnGolg	= "Show special warning when Golganarr has spawned"
 })
 
 L:SetMiscLocalization({

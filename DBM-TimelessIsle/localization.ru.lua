@@ -4,16 +4,15 @@ end
 local L = DBM:GetModLocalization("IsleTimeless")
 
 L:SetGeneralLocalization({
-	name			= "Мир: Вневременной остров"
+	name			= "пїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ"
 })
 
 L:SetWarningLocalization({
-	specWarnShip	= "Корабль призван!"
+	specWarnShip	= "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ!"
 })
 
 L:SetOptionLocalization({
-	specWarnShip	= "Спец-предупреждение когда призывается Корабль",
-	StrictFilter	= "Фильтровать касты от всех мобов кроме текущей цели/фокуса"
+	specWarnShip	= "пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
 })
 
 L:SetMiscLocalization({

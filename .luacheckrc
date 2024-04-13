@@ -44,8 +44,6 @@ globals = {
 	"CreateFrame",
 	"IsInInstance",
 	"GetLocale",
-	"UnitAffectingCombat",
-	"UnitGUID",
 	"UnitName",
 	"C_Map",
 }
