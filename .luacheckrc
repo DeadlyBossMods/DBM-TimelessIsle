@@ -46,5 +46,6 @@ globals = {
 	"GetLocale",
 	"UnitAffectingCombat",
 	"UnitGUID",
+	"UnitName",
 	"C_Map",
 }
