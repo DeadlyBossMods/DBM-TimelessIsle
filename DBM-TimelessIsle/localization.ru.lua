@@ -4,17 +4,21 @@ end
 local L = DBM:GetModLocalization("IsleTimeless")
 
 L:SetGeneralLocalization({
-	name			= "���: ������������ ������"
+	name = "Мир: Вневременной остров"
 })
 
 L:SetWarningLocalization({
-	specWarnShip	= "������� �������!"
+	specWarnShip	= "Корабль вызван!",
+	specWarnGolg	= "Появление Голганарра!"
 })
 
 L:SetOptionLocalization({
-	specWarnShip	= "����-�������������� ����� ����������� �������"
+	specWarnShip	= "Показывать спецпредупреждение при вызове Проклятого корабля 'Вазувий'",
+	specWarnGolg	= "Показывать спецпредупреждение при появлении Голганарра"
 })
 
 L:SetMiscLocalization({
-	shipSummon		= "Hahahahaha!"
+	shipSummon		= "Hahahahaha!",
+	golgSpawn		= "Меня разбудила вечность.",
+	grieversMessage	= "Known TI grievers on your realm: %s"
 })
