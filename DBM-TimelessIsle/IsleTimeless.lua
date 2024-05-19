@@ -90,18 +90,18 @@ function mod:SPELL_CAST_START(args)
 	elseif spellId == 148004 then
 		specWarnConjurKiln:Show()
 		specWarnConjurKiln:Play("targetchange")
-	elseif spellId == 147674 then
+	elseif spellId == 147674 and self:AntiSpam(3, 2) then
 		specWarnCracklingBlow:Show()
 		specWarnCracklingBlow:Play("shockwave")
-	elseif spellId == 148003 then
+	elseif spellId == 148003 and self:AntiSpam(3, 2) then
 		specWarnBlazingBlow:Show()
 		specWarnBlazingBlow:Play("shockwave")
 	elseif spellId == 148001 then
 		warnConjurGolem:Show()
-	elseif spellId == 147998 then
+	elseif spellId == 147998 and self:AntiSpam(3, 2) then
 		specWarnFireStorm:Show()
 		specWarnFireStorm:Play("watchstep")
-	elseif spellId == 147723 then
+	elseif spellId == 147723 and self:AntiSpam(3, 2) then
 		specWarnFallingFlames:Show()
 		specWarnFallingFlames:Play("watchstep")
 	elseif spellId == 147818 then
@@ -124,8 +124,11 @@ end
 function mod:SPELL_AURA_APPLIED_DOSE(args)
 	local spellId = args.spellId
 	if spellId == 147655 and args:IsPlayer() then
-		specWarnFrogToxin:Show(args.amount or 1)
-		specWarnFrogToxin:Play("stackhigh")
+		local amount = args.amount or 1
+		if (amount % 3 == 0) or amount >= 7 then
+			specWarnFrogToxin:Show(args.amount or 1)
+			specWarnFrogToxin:Play("stackhigh")
+		end
 	end
 end
 
