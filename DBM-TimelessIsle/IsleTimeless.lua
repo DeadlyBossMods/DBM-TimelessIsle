@@ -39,6 +39,8 @@ local specWarnCauterize			= mod:NewSpecialWarningInterrupt(147997, nil, nil, nil
 --Rock Moss/Spelurk
 local specWarnRenewingMists		= mod:NewSpecialWarningInterrupt(147769, nil, nil, nil, 1, 2)
 
+local timerPyroblastCD			= mod:NewCDNPTimer(15.8, 148002, nil, nil, nil, 4, nil, DBM_COMMON_L.INTERRUPT_ICON)
+
 local currentZoneID = -1
 
 local function zoneCode()
@@ -46,8 +48,9 @@ local function zoneCode()
 	if currentZoneID == 554 then
 		--Self can be used but LuaLS doesn't understand it's inherting "mod" and causes it to throw errors
 		mod:RegisterShortTermEvents(
-			"SPELL_CAST_START 148003 148004 147997 148001 147998 147828 147826 147674 147723 147769 147702 147818 147817",
+			"SPELL_CAST_START 148003 148004 147997 148001 147998 147828 147826 147674 147723 147769 147702 147818 147817 148002",
 			"SPELL_AURA_APPLIED_DOSE 147655",
+			"UNIT_DIED",
 			"CHAT_MSG_MONSTER_YELL"
 		)
 	else
@@ -82,8 +85,7 @@ function mod:ZONE_CHANGED_NEW_AREA()
 end
 
 function mod:SPELL_CAST_START(args)
-	local sourceGUID = args.sourceGUID
-	if not self:IsValidWarning(sourceGUID) then return end
+	if not self:IsValidWarning(args.sourceGUID) then return end
 	local spellId = args.spellId
 	if spellId == 147997 then
 		if self.Options.SpecWarn147997interrupt and self:CheckInterruptFilter(args.sourceGUID, nil, false) then--Purposely no CD check, some casters can be stunned/knocked/etc (outside of high priests)
@@ -110,9 +112,9 @@ function mod:SPELL_CAST_START(args)
 		specWarnFallingFlames:Show()
 		specWarnFallingFlames:Play("watchstep")
 	elseif spellId == 147818 then
-		self:BossTargetScanner(sourceGUID, "FireBlossomTarget", 0.02, 16)
+		self:BossTargetScanner(args.sourceGUID, "FireBlossomTarget", 0.02, 16)
 	elseif spellId == 147828 then
-		self:BossTargetScanner(sourceGUID, "StormBlossomTarget", 0.02, 16)
+		self:BossTargetScanner(args.sourceGUID, "StormBlossomTarget", 0.02, 16)
 	elseif spellId == 147817 and self:AntiSpam(2.5, 6) then
 		warnFlameBreath:Show()
 	elseif spellId == 147826 and self:AntiSpam(2.5, 6) then
@@ -125,6 +127,8 @@ function mod:SPELL_CAST_START(args)
 	elseif spellId == 147702 and self:AntiSpam(3, 1) then
 		specWarnBlazingCleave:Show()
 		specWarnBlazingCleave:Play("justrun")
+	elseif spellId == 148002 then
+		timerPyroblastCD:Start(nil, args.sourceGUID)
 	end
 end
 
@@ -136,6 +140,13 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 			specWarnFrogToxin:Show(args.amount or 1)
 			specWarnFrogToxin:Play("stackhigh")
 		end
+	end
+end
+
+function mod:UNIT_DIED(args)
+	local cid = self:GetCIDFromGUID(args.destGUID)
+	if cid == 72897 then
+		timerPyroblastCD:Stop(args.destGUID)
 	end
 end
 
