@@ -83,13 +83,13 @@ end
 
 function mod:SPELL_CAST_START(args)
 	local sourceGUID = args.sourceGUID
-	if not self:IsValidWarning(sourceGUID) then return end
+	if not self:IsValidWarning(sourceGUID, nil, nil, nil, true) then return end
 	local spellId = args.spellId
 	if spellId == 147997 then
 		if self.Options.SpecWarn147997interrupt and self:CheckInterruptFilter(args.sourceGUID, nil, false) then--Purposely no CD check, some casters can be stunned/knocked/etc (outside of high priests)
 			specWarnCauterize:Show(args.sourceName)
 			specWarnCauterize:Play("kickcast")
-		else
+		elseif self:AntiSpam(2, 7) then
 			warnCauterize:Show()
 		end
 	elseif spellId == 148004 and self:AntiSpam(3, 5) then
