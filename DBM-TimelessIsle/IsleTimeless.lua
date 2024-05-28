@@ -52,7 +52,7 @@ local function zoneCode()
 			"SPELL_AURA_APPLIED_DOSE 147655",
 			"CHAT_MSG_MONSTER_YELL"
 		)
-	elseif eventsRegistered then
+	elseif currentZoneID ~= 554 and eventsRegistered then
 		--Self can be used but LuaLS doesn't understand it's inherting "mod" and causes it to throw errors
 		eventsRegistered = false
 		mod:UnregisterShortTermEvents()
