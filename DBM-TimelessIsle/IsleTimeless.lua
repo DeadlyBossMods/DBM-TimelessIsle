@@ -40,18 +40,21 @@ local specWarnCauterize			= mod:NewSpecialWarningInterrupt(147997, nil, nil, nil
 local specWarnRenewingMists		= mod:NewSpecialWarningInterrupt(147769, nil, nil, nil, 1, 2)
 
 local currentZoneID = -1
+local eventsRegistered = false
 
 local function zoneCode()
 	currentZoneID = C_Map.GetBestMapForUnit("player") or 0
-	if currentZoneID == 554 then
+	if currentZoneID == 554 and not eventsRegistered then
 		--Self can be used but LuaLS doesn't understand it's inherting "mod" and causes it to throw errors
+		eventsRegistered = true
 		mod:RegisterShortTermEvents(
 			"SPELL_CAST_START 148003 148004 147997 148001 147998 147828 147826 147674 147723 147769 147702 147818 147817",
 			"SPELL_AURA_APPLIED_DOSE 147655",
 			"CHAT_MSG_MONSTER_YELL"
 		)
-	else
+	elseif eventsRegistered then
 		--Self can be used but LuaLS doesn't understand it's inherting "mod" and causes it to throw errors
+		eventsRegistered = false
 		mod:UnregisterShortTermEvents()
 	end
 end
