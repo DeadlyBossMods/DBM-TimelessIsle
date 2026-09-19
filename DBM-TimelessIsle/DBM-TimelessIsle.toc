@@ -1,5 +1,5 @@
-﻿## Interface: 50504
-## X-Min-Interface: 50500
+## AllowLoadGameType: mists, standard
+## Interface: 50504, 110207
 ## Category: DBM
 
 ## Title:|cffffe00a<|r|cffff7d0aDBM|r|cffffe00a>|r |cff69ccf0World: Timeless Isle|r
