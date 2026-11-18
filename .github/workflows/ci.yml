@@ -11,20 +11,42 @@ on:
       - master
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  test:
+    name: Testing
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          path: ./workspace
+
+      - name: Install and run Luacheck
+        uses: BigWigsMods/luacheck@main
+        with:
+          args: "--no-color -q"
+          config: https://raw.githubusercontent.com/DeadlyBossMods/DBM-TimelessIsle/refs/heads/master/.luacheckrc
+          path: ./workspace
+
+      - name: LuaLS check
+        uses: DeadlyBossMods/LuaLS-config@main
+        with:
+          luals-check-dir: ${{ github.workspace }}/workspace
+
+  deploy:
+    name: Deployment
+    runs-on: ubuntu-24.04
+    if: ${{ github.event_name != 'pull_request' }}
+    needs:
+      - test
+    strategy:
+      fail-fast: false
 
     steps:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-
-      - name: Install and run Luacheck
-        uses: nebularg/actions-luacheck@v1
-        with:
-          args: "--no-color -q"
-
-      - name: Create Retail Package
+      - name: Create Package
         uses: BigWigsMods/packager@master
         env:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
