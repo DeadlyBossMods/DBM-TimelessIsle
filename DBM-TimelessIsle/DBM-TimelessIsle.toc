@@ -24,6 +24,6 @@
 ## Version: @project-version@
 
 localization.en.lua
-localization.es.lua
-localization.ru.lua
+localization.es.lua [AllowLoadTextLocale esES, esMX]
+localization.ru.lua [AllowLoadTextLocale ruRU]
 IsleTimeless.lua
